@@ -8,8 +8,9 @@
   --ink:       #0e0d0c;
   --ink-soft:  #55504a;
   --line:      rgba(14,13,12,.12);
-  --accent:    #ff4426;
-  --accent-ink:#fff3ee;
+  --accent:      #dda813;  /* dourado da marca — superfícies, fundo escuro, gráficos */
+  --accent-deep: #8c6a0c;  /* mesma matiz, escurecida para texto sobre fundo claro */
+  --accent-ink:  #14100a;  /* texto sobre o dourado */
   --dark:      #0e0d0c;
   --dark-soft: #1c1a18;
   --on-dark:   #f6f2ea;
@@ -48,7 +49,7 @@ p{ margin:0; }
   letter-spacing: .16em;
   text-transform: uppercase;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--accent-deep);
   margin: 0 0 14px;
 }
 .eyebrow.center{ text-align:center; }
@@ -268,7 +269,7 @@ p{ margin:0; }
 }
 .about-media img{ width:100%; height:100%; object-fit:cover; object-position: center 18%; }
 .about-copy h2{ font-size: clamp(1.9rem, 3.6vw, 3rem); line-height:1.12; margin-bottom:26px; }
-.about-copy h2 em{ font-style:normal; color: var(--accent); }
+.about-copy h2 em{ font-style:normal; color: var(--accent-deep); }
 .about-text{ color: var(--ink-soft); font-size:1.04rem; line-height:1.7; margin-bottom:18px; max-width:52ch; }
 .about-signature{ height:58px; width:auto; margin-top:12px; opacity:.9; }
 
@@ -293,7 +294,7 @@ p{ margin:0; }
   letter-spacing:-.03em;
   font-variant-numeric: tabular-nums;
 }
-.stats-band .stat-num em{ font-style:normal; color: var(--accent); }
+.stats-band .stat-num em{ font-style:normal; color: var(--accent-deep); }
 .stats-band .stat-bar{
   width:56px; height:3px; margin:20px 0 16px;
   background: var(--line); border-radius:10px; overflow:hidden;
@@ -307,6 +308,18 @@ p{ margin:0; }
 .stats-band .stat-label{
   font-size:.92rem; color: var(--ink-soft);
   letter-spacing:.02em;
+}
+
+@media (max-width: 900px){
+  /* Empilhada, a faixa segue o mesmo eixo da bio e da assinatura, em vez de
+     ficar centralizada logo abaixo de um bloco alinhado à esquerda. */
+  .stats-band{
+    flex-direction: column; align-items: flex-start;
+    justify-content: flex-start; text-align:left;
+    gap: 30px; padding-bottom: 76px;
+  }
+  .stats-band .stat{ align-items: flex-start; }
+  .stats-band .stat-bar{ margin: 14px 0 10px; }
 }
 
 /* ==========================================================================
@@ -330,14 +343,11 @@ p{ margin:0; }
   will-change: transform, opacity;
   transform: scale(.7); opacity:0;
 }
-.impact-line{ display:block; }
-.impact-line-sm{
-  font-size: clamp(1.4rem, 4.2vw, 3rem);
-  opacity:.62;
-  margin-bottom: .1em;
-}
-.impact-line-lg{
-  font-size: clamp(4rem, 16vw, 13rem); line-height:.92;
+/* Os três pilares têm o mesmo peso: mesmo corpo, mesma cor. */
+.impact-line{
+  display:block;
+  font-size: clamp(2.6rem, 9vw, 6rem);
+  line-height: 1.04;
 }
 
 /* ==========================================================================
@@ -364,7 +374,7 @@ p{ margin:0; }
   display:flex;
 }
 .discipline-head > div{ max-width: 640px; }
-.discipline-num{ font-family: var(--display); color: var(--accent); font-size:.85rem; font-weight:600; }
+.discipline-num{ font-family: var(--display); color: var(--accent-deep); font-size:.85rem; font-weight:600; }
 .discipline-head h3{ font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 14px 0 12px; line-height:1.12; }
 .discipline-head p{ color: var(--ink-soft); font-size:1rem; line-height:1.65; }
 
@@ -409,7 +419,7 @@ p{ margin:0; }
   transition: transform .4s var(--ease), opacity .4s var(--ease);
 }
 .p-item:hover figcaption{ transform:none; opacity:1; }
-.p-tag{ font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color: var(--accent); font-weight:700; }
+.p-tag{ font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color: var(--accent-deep); font-weight:700; }
 .p-title{ font-family: var(--display); font-size:1rem; font-weight:500; }
 .p-client{ font-size:.8rem; opacity:.75; }
 
@@ -526,7 +536,7 @@ p{ margin:0; }
 .quiz-step.is-active{ display:block; animation: quizIn .35s var(--ease); }
 @keyframes quizIn{ from{ opacity:0; transform:translateX(12px);} to{ opacity:1; transform:none;} }
 
-.quiz-step-label{ font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color: var(--accent); font-weight:700; margin-bottom:10px; }
+.quiz-step-label{ font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color: var(--accent-deep); font-weight:700; margin-bottom:10px; }
 .quiz-step h3{ font-size:1.5rem; line-height:1.2; margin-bottom:24px; }
 
 .quiz-step .field{ margin-bottom:20px; }
