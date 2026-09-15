@@ -188,6 +188,8 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
   function animate(el){
     const target = parseInt(el.dataset.countTo, 10);
+    const stat = el.closest(".stat");
+    if (stat) stat.classList.add("is-counting");
     if (reduceMotion) { el.textContent = target; return; }
     const duration = 1400;
     const start = performance.now();
@@ -207,7 +209,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
         io.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.6 });
+  }, { threshold: 0.3, rootMargin: "0px 0px -80px 0px" });
 
   values.forEach((el) => io.observe(el));
 })();
