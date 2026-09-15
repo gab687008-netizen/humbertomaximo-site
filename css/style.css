@@ -294,6 +294,10 @@ p{ margin:0; }
 @media (max-width: 900px){
   .about{ grid-template-columns: 1fr; padding-top:120px; }
   .about-media{ aspect-ratio: 3/4; max-width: 420px; margin: 0 auto; }
+  /* Empilhada, a seção segue o mesmo eixo central da intro do portfólio. */
+  .about-copy{ text-align:center; }
+  .about-text{ margin-left:auto; margin-right:auto; }
+  .about-signature{ margin-left:auto; margin-right:auto; }
 }
 
 /* ==========================================================================
@@ -329,14 +333,7 @@ p{ margin:0; }
 }
 
 @media (max-width: 900px){
-  /* Empilhada, a faixa segue o mesmo eixo da bio e da assinatura, em vez de
-     ficar centralizada logo abaixo de um bloco alinhado à esquerda. */
-  .stats-band{
-    flex-direction: column; align-items: flex-start;
-    justify-content: flex-start; text-align:left;
-    gap: 30px; padding-bottom: 76px;
-  }
-  .stats-band .stat{ align-items: flex-start; }
+  .stats-band{ flex-direction: column; gap: 30px; padding-bottom: 76px; }
   .stats-band .stat-bar{ margin: 14px 0 10px; }
 }
 
