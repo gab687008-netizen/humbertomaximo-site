@@ -109,8 +109,12 @@ p{ margin:0; }
 .nav.is-light{ color: var(--ink); }
 .nav.is-light.is-scrolled{ background: rgba(246,242,234,.86); border-bottom:1px solid var(--line); }
 
-.nav-mark{ font-family: var(--display); font-weight:700; font-size:1rem; letter-spacing:-.01em; }
-.nav-mark span{ opacity:.55; font-weight:400; }
+.nav-mark{
+  display:flex; align-items:center; gap:9px;
+  font-family: var(--display); font-weight:700; font-size:1rem; letter-spacing:-.01em;
+}
+.nav-logo-icon{ height:28px; width:auto; display:block; }
+.nav-mark em{ opacity:.55; font-weight:400; font-style:normal; }
 .nav-links{ display:flex; gap:34px; font-size:.92rem; }
 .nav-links a{ position:relative; padding:4px 0; }
 .nav-links a::after{
@@ -177,6 +181,7 @@ p{ margin:0; }
 @media (prefers-reduced-motion: reduce){
   .hero-media img{ animation:none; }
 }
+.hero-logo{ height:52px; width:auto; margin:0 auto 24px; display:block; }
 .hero-eyebrow{
   font-size:.8rem; letter-spacing:.22em; text-transform:uppercase;
   color: var(--on-dark-soft); margin-bottom: 22px; font-weight:500;
@@ -237,6 +242,7 @@ p{ margin:0; }
 .about-copy h2{ font-size: clamp(1.9rem, 3.6vw, 3rem); line-height:1.12; margin-bottom:26px; }
 .about-copy h2 em{ font-style:normal; color: var(--accent); }
 .about-text{ color: var(--ink-soft); font-size:1.04rem; line-height:1.7; margin-bottom:18px; max-width:52ch; }
+.about-signature{ height:46px; width:auto; margin-top:10px; opacity:.85; }
 
 @media (max-width: 900px){
   .about{ grid-template-columns: 1fr; padding-top:120px; }
@@ -435,8 +441,12 @@ p{ margin:0; }
   display:flex; flex-direction:column; align-items:center; text-align:center;
   gap: 20px;
 }
-.footer-mark{ font-family: var(--display); font-weight:700; font-size:1.15rem; color: var(--on-dark); }
-.footer-mark span{ opacity:.55; font-weight:400; }
+.footer-mark{
+  display:flex; align-items:center; gap:11px;
+  font-family: var(--display); font-weight:700; font-size:1.15rem; color: var(--on-dark);
+}
+.footer-logo-icon{ height:36px; width:auto; display:block; }
+.footer-mark em{ opacity:.55; font-weight:400; font-style:normal; }
 .footer-social{
   display:inline-flex; align-items:center; gap:9px;
   border:1px solid rgba(246,242,234,.22); border-radius:100px;
