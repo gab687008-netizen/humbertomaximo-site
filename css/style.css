@@ -231,7 +231,7 @@ p{ margin:0; }
    ========================================================================== */
 .about{
   max-width: var(--container); margin: 0 auto;
-  padding: 160px var(--edge) 120px;
+  padding: 160px var(--edge) 70px;
   display:grid; grid-template-columns: .8fr 1.2fr; gap: 72px; align-items:center;
 }
 .about-media{
@@ -254,7 +254,7 @@ p{ margin:0; }
    ========================================================================== */
 .stats-band{
   max-width: var(--container); margin: 0 auto;
-  padding: 0 var(--edge) 140px;
+  padding: 20px var(--edge) 90px;
   display:flex; justify-content:center; align-items:center;
   gap: clamp(48px, 10vw, 140px); flex-wrap:wrap; text-align:center;
 }
