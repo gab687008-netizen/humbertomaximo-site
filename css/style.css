@@ -147,8 +147,8 @@ p{ margin:0; }
   min-height: 100dvh;
   background: var(--dark);
   color: var(--on-dark);
-  display:flex; align-items:center; justify-content:center;
-  padding: 140px var(--edge) 120px;
+  display:flex; flex-direction:column; align-items:center;
+  padding: 96px var(--edge) 64px;
   text-align:center;
   overflow:hidden;
 }
@@ -171,9 +171,8 @@ p{ margin:0; }
 }
 .hero-inner{
   position:relative; z-index:2; width:100%; max-width: 980px;
-  margin-top: -60px;
+  flex: 1;
   display:flex; flex-direction:column; align-items:center; justify-content:space-between;
-  height: min(56vh, 440px);
 }
 @media (prefers-reduced-motion: reduce){
   .hero-media img{ animation:none; }
