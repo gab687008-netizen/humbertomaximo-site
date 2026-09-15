@@ -132,7 +132,13 @@ p{ margin:0; }
   display:flex; align-items:center; gap:9px;
   font-family: var(--display); font-weight:700; font-size:1rem; letter-spacing:-.01em;
 }
-.nav-logo-icon{ height:28px; width:auto; display:block; }
+/* Brasão: versão clara sobre fundo escuro, versão original sobre fundo claro.
+   As duas ficam empilhadas e trocam junto com a cor da nav. */
+.nav-logo{ display:grid; }
+.nav-logo-icon{ height:28px; width:auto; display:block; grid-area:1/1; transition: opacity .4s var(--ease); }
+.nav .on-light{ opacity:0; }
+.nav.is-light .on-light{ opacity:1; }
+.nav.is-light .on-dark{ opacity:0; }
 .nav-links{ display:flex; gap:34px; font-size:.92rem; }
 .nav-links a{ position:relative; padding:4px 0; }
 .nav-links a::after{
