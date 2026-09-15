@@ -180,15 +180,96 @@ document.getElementById("year").textContent = new Date().getFullYear();
   });
 })();
 
-/* ---------------- contact form -> WhatsApp ---------------- */
-(function contactForm(){
-  const form = document.getElementById("contactForm");
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const nome = form.nome.value.trim();
-    const empresa = form.empresa.value.trim();
-    const servico = form.servico.value;
-    const mensagem = form.mensagem.value.trim();
+/* ---------------- stats count-up ---------------- */
+(function statsCountUp(){
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const values = document.querySelectorAll(".stat-value[data-count-to]");
+  if (!values.length) return;
+
+  function animate(el){
+    const target = parseInt(el.dataset.countTo, 10);
+    if (reduceMotion) { el.textContent = target; return; }
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * target);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animate(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.6 });
+
+  values.forEach((el) => io.observe(el));
+})();
+
+/* ---------------- quiz modal -> WhatsApp ---------------- */
+(function quiz(){
+  const overlay = document.getElementById("quizOverlay");
+  const trigger = document.getElementById("quizTrigger");
+  const closeBtn = document.getElementById("quizClose");
+  const progressBar = document.getElementById("quizProgressBar");
+  const steps = Array.from(document.querySelectorAll(".quiz-step"));
+  const options = Array.from(document.querySelectorAll(".quiz-option"));
+  const submitBtn = document.getElementById("quizSubmit");
+
+  let current = 1;
+  let selectedService = "";
+
+  function goTo(step){
+    current = step;
+    steps.forEach((s) => s.classList.toggle("is-active", Number(s.dataset.step) === step));
+    progressBar.style.width = `${(step / steps.length) * 100}%`;
+  }
+
+  function open(){
+    overlay.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+    goTo(1);
+  }
+
+  function close(){
+    overlay.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  trigger.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
+  overlay.addEventListener("click", (e) => { if (e.target === overlay) close(); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && overlay.classList.contains("is-open")) close();
+  });
+
+  document.querySelectorAll("[data-quiz-next]").forEach((btn) =>
+    btn.addEventListener("click", () => goTo(Math.min(current + 1, steps.length)))
+  );
+  document.querySelectorAll("[data-quiz-back]").forEach((btn) =>
+    btn.addEventListener("click", () => goTo(Math.max(current - 1, 1)))
+  );
+
+  options.forEach((opt) => {
+    opt.addEventListener("click", () => {
+      options.forEach((o) => o.classList.remove("is-selected"));
+      opt.classList.add("is-selected");
+      selectedService = opt.dataset.value;
+      setTimeout(() => goTo(3), 250);
+    });
+  });
+
+  submitBtn.addEventListener("click", () => {
+    const nome = document.getElementById("qName").value.trim() || "sem nome informado";
+    const empresa = document.getElementById("qCompany").value.trim();
+    const mensagem = document.getElementById("qMsg").value.trim();
+    const servico = selectedService || "não especificado";
 
     let text = `Olá, Humberto! Meu nome é ${nome}.`;
     if (empresa) text += ` Represento ${empresa}.`;
@@ -197,5 +278,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
     window.open(url, "_blank", "noopener");
+    close();
   });
 })();
