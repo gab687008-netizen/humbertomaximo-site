@@ -109,12 +109,30 @@ p{ margin:0; }
 .nav.is-light{ color: var(--ink); }
 .nav.is-light.is-scrolled{ background: rgba(246,242,234,.86); border-bottom:1px solid var(--line); }
 
+/* Wordmark oficial (tipografia da marca).
+   O texto fica no HTML para leitores de tela e como fallback; onde há suporte a
+   mask-image, ele é substituído pelo lettering oficial, que herda a cor da nav
+   (clara sobre fundo escuro, escura sobre fundo claro) junto com a transição. */
+.wordmark{
+  display:block; white-space:nowrap;
+  font-family: var(--display); font-weight:700; letter-spacing:-.01em;
+}
+@supports ((-webkit-mask-image: url("../assets/img/brand/logo-wordmark.png")) or (mask-image: url("../assets/img/brand/logo-wordmark.png"))){
+  .wordmark{
+    text-indent:-200vw; overflow:hidden;
+    background-color: currentColor;
+    -webkit-mask: url("../assets/img/brand/logo-wordmark.png") no-repeat center/contain;
+    mask: url("../assets/img/brand/logo-wordmark.png") no-repeat center/contain;
+  }
+}
+.nav-wordmark{ width:146px; height:13px; }
+.footer-wordmark{ width:168px; height:15px; }
+
 .nav-mark{
   display:flex; align-items:center; gap:9px;
   font-family: var(--display); font-weight:700; font-size:1rem; letter-spacing:-.01em;
 }
 .nav-logo-icon{ height:28px; width:auto; display:block; }
-.nav-mark em{ opacity:.55; font-weight:400; font-style:normal; }
 .nav-links{ display:flex; gap:34px; font-size:.92rem; }
 .nav-links a{ position:relative; padding:4px 0; }
 .nav-links a::after{
@@ -141,6 +159,10 @@ p{ margin:0; }
 @media (max-width: 820px){
   .nav-links, .nav-cta{ display:none; }
   .nav-burger{ display:flex; }
+}
+@media (max-width: 420px){
+  .nav-logo-icon{ height:24px; }
+  .nav-wordmark{ width:123px; height:11px; }
 }
 
 /* ==========================================================================
@@ -242,7 +264,7 @@ p{ margin:0; }
 .about-copy h2{ font-size: clamp(1.9rem, 3.6vw, 3rem); line-height:1.12; margin-bottom:26px; }
 .about-copy h2 em{ font-style:normal; color: var(--accent); }
 .about-text{ color: var(--ink-soft); font-size:1.04rem; line-height:1.7; margin-bottom:18px; max-width:52ch; }
-.about-signature{ height:46px; width:auto; margin-top:10px; opacity:.85; }
+.about-signature{ height:58px; width:auto; margin-top:12px; opacity:.9; }
 
 @media (max-width: 900px){
   .about{ grid-template-columns: 1fr; padding-top:120px; }
@@ -446,7 +468,6 @@ p{ margin:0; }
   font-family: var(--display); font-weight:700; font-size:1.15rem; color: var(--on-dark);
 }
 .footer-logo-icon{ height:36px; width:auto; display:block; }
-.footer-mark em{ opacity:.55; font-weight:400; font-style:normal; }
 .footer-social{
   display:inline-flex; align-items:center; gap:9px;
   border:1px solid rgba(246,242,234,.22); border-radius:100px;
